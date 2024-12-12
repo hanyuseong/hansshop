@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            background-color: #2c3e50;
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            padding: 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #16a085;
+            padding-left: 5px;
+        }
+        main {
+            margin-left: 270px;
+            padding: 20px;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .content-header {
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            color: #333;
+        }
+        button {
+            background-color: #16a085;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #13856b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Admin Dashboard</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin/products">Product 관리</a></li>
+            <li><a href="/admin/category/list">Category 관리</a></li>
+            <li><a href="#">통계</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="content-header">
+            <h2>상품 관리</h2>
+        </div>
+        <section>
+            <a href="/admin/products/new" style="color: #16a085; text-decoration: underline;">상품 추가하기</a>
+            <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #333; color: #fff;">
+                        <th style="padding: 10px; border: 1px solid #ddd;">ID11</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">상품명</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">가격</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">재고</th>
+                        <th style="padding: 10px; border: 1px solid #ddd;">관리</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="product : ${products.content}">
+                        <td th:text="${product.id}" style="padding: 10px; border: 1px solid #ddd;"></td>
+                        <td th:text="${product.name}" style="padding: 10px; border: 1px solid #ddd;"></td>
+                        <td th:text="${product.price}" style="padding: 10px; border: 1px solid #ddd;"></td>
+                        <td th:text="${product.stock}" style="padding: 10px; border: 1px solid #ddd;"></td>
+                        <td style="padding: 10px; border: 1px solid #ddd;">
+                            <a th:href="@{/admin/products/{id}/edit(id=${product.id})}" style="color: #16a085;">수정</a> |
+                            <form th:action="@{/admin/products/{id}/delete(id=${product.id})}" method="post" style="display: inline;">
+                                <button type="submit" style="background-color: #e74c3c;">삭제</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- 페이징 -->
+            <div th:if="${products.totalPages > 0}" style="text-align: center; margin-top: 20px;">
+                <span th:each="pageNumber : ${#numbers.sequence(0, products.totalPages - 1)}">
+                    <a th:href="@{/admin/products(page=${pageNumber})}" 
+                       th:text="${pageNumber + 1}"
+                       style="margin: 0 5px; color: #16a085; text-decoration: none;"
+                       th:style="${pageNumber == products.number} ? 'font-weight: bold; color: #2c3e50;' : 'color: #16a085;'">
+                    </a>
+                </span>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024222 Online Shop. All rights reserved.</p>
+    </footer>
+</body>
+</html>

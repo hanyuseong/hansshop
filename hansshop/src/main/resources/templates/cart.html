@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Online Shop - Cart</title>
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+	<header>
+		<div class="navbar">
+			<h1>My Cart</h1>
+			<nav>
+				<a href="/"><i class="fas fa-home"></i> Home</a> <a href="/orders"><i
+					class="fas fa-box"></i> Orders</a> <a href="/exchanges"><i
+					class="fas fa-exchange-alt"></i> Exchanges</a>
+			</nav>
+		</div>
+	</header>
+	<main>
+		<div class="cart-list">
+			<h2>Your Cart Items</h2>
+			<ul>
+				<li th:if="${cartItems.empty}">
+					<p>Your cart is empty.</p>
+				</li>
+				<li th:each="cartItem : ${cartItems}" class="cart-item">
+				<img
+					th:src="${cartItem?.imageUrl != null ? cartItem.imageUrl : '/static/images/default.png'}"
+					alt="상품 이미지" class="cart-item-image">
+					<div class="cart-item-info">
+						<h3 th:text="${cartItem?.name ?: '알 수 없는 상품'}"
+							class="cart-item-name"></h3>
+						<p th:text="${cartItem?.price ?: '0.00'} + ' 원'"
+							class="cart-item-price"></p>
+						<form th:action="@{/cart/remove/{id}(id=${cartItem?.id ?: 0})}"
+							method="post">
+							<button type="submit" class="remove-from-cart-button">제거</button>
+						</form>
+					</div></li>
+			</ul>
+			<div class="checkout-section">
+				<form th:action="@{/order}" method="post">
+					<button type="submit" class="checkout-button">Proceed to
+						Checkout</button>
+				</form>
+			</div>
+		</div>
+
+	</main>
+	<footer>
+		<p>&copy; 2024 Online Shop. All rights reserved.</p>
+	</footer>
+</body>
+</html>

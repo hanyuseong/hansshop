@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="/static/styles.css">
+<style>
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	text-align: center;
+}
+
+nav {
+	background-color: #2c3e50;
+	height: 100%;
+	width: 250px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	padding-top: 20px;
+}
+
+nav ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+nav ul li {
+	padding: 15px;
+}
+
+nav ul li a {
+	color: #fff;
+	text-decoration: none;
+	display: block;
+}
+
+nav ul li a:hover {
+	background-color: #16a085;
+	padding-left: 5px;
+}
+
+main {
+	margin-left: 270px;
+	padding: 20px;
+}
+
+footer {
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	padding: 10px;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+}
+
+.content-header {
+	margin-bottom: 20px;
+	font-size: 1.5em;
+	color: #333;
+}
+
+.form-group {
+	margin-bottom: 15px;
+}
+
+label {
+	font-weight: bold;
+	display: block;
+}
+
+input[type="text"], input[type="number"], select, textarea {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+button {
+	background-color: #16a085;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #13856b;
+}
+</style>
+</head>
+<body>
+	<header>
+		<h1>Admin Dashboard</h1>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="/admin">Dashboard</a></li>
+			<li><a href="/admin/products">Product 관리</a></li>
+			<li><a href="/admin/category/list">Category 관리</a></li>
+			<li><a href="#">통계</a></li>
+		</ul>
+	</nav>
+	<main>
+		<div class="content-header">
+			<h2>계정 관리</h2>
+		</div>
+		<section>
+			<h3>Product 관리</h3>
+			<a href="/admin/product/add"
+				style="color: #16a085; text-decoration: underline;">상품 추가하기</a>
+			<table
+				style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+				<thead>
+					<tr style="background-color: #333; color: #fff;">
+						<th style="padding: 10px; border: 1px solid #ddd;">ID</th>
+						<th style="padding: 10px; border: 1px solid #ddd;">Name</th>
+						<th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+						<th style="padding: 10px; border: 1px solid #ddd;">Stock</th>
+						<th style="padding: 10px; border: 1px solid #ddd;">Category</th>
+						<th style="padding: 10px; border: 1px solid #ddd;">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="product : ${products}">
+						<td th:text="${product.id}"
+							style="padding: 10px; border: 1px solid #ddd;"></td>
+						<td th:text="${product.name}"
+							style="padding: 10px; border: 1px solid #ddd;"></td>
+						<td th:text="${product.price}"
+							style="padding: 10px; border: 1px solid #ddd;"></td>
+						<td th:text="${product.stock}"
+							style="padding: 10px; border: 1px solid #ddd;"></td>
+						<td th:text="${product.category.name}"
+							style="padding: 10px; border: 1px solid #ddd;"></td>
+						<td style="padding: 10px; border: 1px solid #ddd;">
+							<form th:action="@{/admin/products/edit/{id}(id=${product.id})}"
+								method="get" style="display: inline;">
+								<button type="submit"
+									style="background-color: #3498db; color: white; border: none; padding: 5px 10px; cursor: pointer;">Edit</button>
+							</form>
+							<form
+								th:action="@{/admin/products/delete/{id}(id=${product.id})}"
+								method="post" style="display: inline;">
+								<button type="submit"
+									style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer;">Delete</button>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</main>
+	<footer>
+		<p>&copy; 2024 Online Shop. All rights reserved.</p>
+	</footer>
+</body>
+</html>

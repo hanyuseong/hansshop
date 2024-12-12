@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Category</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Add New Category</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/admin/products">Product 관리</a></li>
+            <li><a href="/admin/category">Category 관리</a></li>
+        </ul>
+    </nav>
+    <main>
+        <form th:action="@{/admin/category/add}" method="post">
+            <label for="name">Category Name:</label>
+            <input type="text" id="name" name="name" th:value="${category.name}" required>
+            <button type="submit">Add Category</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Online Shop. All rights reserved.</p>
+    </footer>
+</body>
+</html>

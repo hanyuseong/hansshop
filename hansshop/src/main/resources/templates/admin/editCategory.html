@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Category 수정</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow-y: hidden;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        nav {
+            background-color: #2c3e50;
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding-top: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            padding: 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+        }
+        nav ul li a:hover {
+            background-color: #16a085;
+            padding-left: 5px;
+        }
+        main {
+            margin-left: 270px;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+            height: 100%;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #16a085;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #13856b;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Category 수정</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin/products">Product 관리</a></li>
+            <li><a href="/admin/category">Category 관리</a></li>
+            <li><a href="#">통계</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="content-header">
+            <h2>카테고리 수정</h2>
+        </div>
+        <section>
+            <form th:action="@{/admin/category/edit" method="post">
+                <div class="form-group">
+                    <label for="name">카테고리 이름:</label>
+                    <input type="text" id="name" name="name" th:value="${category.name}" required>
+                    <input type="hidden" id="id" name="id" th:value="${category.id}" required>
+                </div>
+                <button type="submit">수정하기</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Online Shop. All rights reserved.</p>
+    </footer>
+</body>
+</html>

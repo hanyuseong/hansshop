@@ -1,0 +1,114 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.product-list, .cart-items, .order-list, .exchange-list {
+    padding: 20px;
+}
+
+.product-item, .cart-item, .order-item, .exchange-item {
+    background-color: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-name, .product-price, .order-id, .order-status, .exchange-id, .exchange-status {
+    margin: 5px 0;
+}
+
+.add-to-cart-button, .remove-from-cart-button, .place-order-button, .cancel-order-button, .cancel-return-button, .cancel-exchange-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-to-cart-button:hover, .remove-from-cart-button:hover, .place-order-button:hover, .cancel-order-button:hover, .cancel-return-button:hover, .cancel-exchange-button:hover {
+    background-color: #0056b3;
+}
+
+/* Styles for the checkout button */
+.checkout-button {
+    background-color: #16a085; /* A pleasant green color */
+    color: white; /* White text for contrast */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 20px; /* Add some padding for a comfortable click area */
+    font-size: 16px; /* Slightly larger font size for readability */
+    font-weight: bold; /* Bold text for emphasis */
+    cursor: pointer; /* Pointer cursor to indicate it is clickable */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    display: block; /* Ensure it behaves like a block element */
+    margin: 20px auto; /* Center-align with auto margins */
+    text-align: center; /* Center the text */
+}
+
+.checkout-button:hover {
+    background-color: #13856b; /* Darker green on hover */
+}
+
+.checkout-button:active {
+    background-color: #0f654e; /* Even darker green when clicked */
+}
+
+/* Additional styling for the cart-item layout */
+.cart-item {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically align items */
+    margin-bottom: 20px; /* Add spacing between items */
+}
+
+.cart-item-image {
+    max-width: 150px; /* Limit the image size */
+    margin-right: 20px; /* Add spacing between image and text */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+.cart-item-info {
+    flex-grow: 1; /* Allow the info section to expand */
+}
